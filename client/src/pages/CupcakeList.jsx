@@ -1,17 +1,18 @@
 import { useLoaderData } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Cupcake from "../components/Cupcake";
 
 function CupcakeList() {
   // Step 1: get all cupcakes
   const cupcakes = useLoaderData();
+  const [accessories, setAccessories] = useState([]);
   console.info(cupcakes);
 
   // Step 3: get all accessories
   useEffect(() => {
     fetch("http://localhost:3310/api/accessories")
       .then((res) => res.json())
-      .then((data) => console.info(data))
+      .then((data) => setAccessories(data))
       .catch((error) => console.error(error));
   }, []);
 
@@ -27,6 +28,11 @@ function CupcakeList() {
           <select id="cupcake-select">
             <option value="">---</option>
             {/* Step 4: add an option for each accessory */}
+            {accessories.map((accessory) => (
+              <option value={accessory.id} key={accessory.id}>
+                {accessory.name}
+              </option>
+            ))}
           </select>
         </label>
       </form>
