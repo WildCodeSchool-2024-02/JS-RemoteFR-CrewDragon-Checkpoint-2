@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
@@ -42,6 +43,24 @@ function CupcakeList() {
   const cupcakes = useLoaderData();
 
   // Step 3: get all accessories
+  const [accessories, setAccessories] = useState([]);
+
+  useEffect(() => {
+    const fetchAccessories = async () => {
+      try {
+        const response = await fetch("http://localhost:3310/api/accessories");
+        if (!response.ok) {
+          throw new Error("Failed to fetch accessories");
+        }
+        const data = await response.json();
+        setAccessories(data);
+      } catch (error) {
+        console.error("Error fetching accessories:", error);
+      }
+    };
+
+    fetchAccessories();
+  }, []);
 
   // Step 5: create filter state
 
@@ -55,6 +74,11 @@ function CupcakeList() {
           <select id="cupcake-select">
             <option value="">---</option>
             {/* Step 4: add an option for each accessory */}
+            {accessories.map((accessory) => (
+              <option key={accessory.id} value={accessory.id}>
+                {accessory.name}
+              </option>
+            ))}
           </select>
         </label>
       </form>
