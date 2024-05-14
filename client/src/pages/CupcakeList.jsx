@@ -38,8 +38,9 @@ someCupcakes.push(
 /* ************************************************************************* */
 
 function CupcakeList() {
+  const data = useLoaderData();
   // Step 1: get all cupcakes
-  console.info(useLoaderData());
+  console.info(useLoaderData(data));
 
   // Step 3: get all accessories
 
