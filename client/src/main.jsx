@@ -8,6 +8,8 @@ import App from "./App";
 import Home from "./pages/Home";
 import Instructions from "./pages/Instructions";
 import CupcakeList from "./pages/CupcakeList";
+import CupcakeDetails from "./pages/CupcakeDetails";
+import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,24 @@ const router = createBrowserRouter([
             return error;
           }
         },
+      },
+      {
+        path: "/cupcakes/:id",
+        element: <CupcakeDetails />,
+        // Step 1: load data here
+        loader: async ({ params }) => {
+          const { id } = params;
+          try {
+            return fetch(`http://localhost:3310/api/cupcakes/${id}`);
+            // return fetch("http://localhost:3310/api/cupcakes/" + id);
+          } catch (error) {
+            return error;
+          }
+        },
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
