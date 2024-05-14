@@ -54,7 +54,10 @@ function CupcakeList() {
 
   console.info(acc);
   // Step 5: create filter state
+  const [typeOfCupcake, setTypeOfCupcake] = useState(allCupcakes);
 
+  console.info(setTypeOfCupcake);
+  console.info(typeOfCupcake);
   return (
     <>
       <h1>My cupcakes</h1>
@@ -76,7 +79,7 @@ function CupcakeList() {
       <ul className="cupcake-list" id="cupcake-list">
         {/* Step 2: repeat this block for each cupcake */}
 
-        {allCupcakes.map((oneCupcake) => (
+        {typeOfCupcake.map((oneCupcake) => (
           <Cupcake key={oneCupcake.name} data={oneCupcake} />
         ))}
 
