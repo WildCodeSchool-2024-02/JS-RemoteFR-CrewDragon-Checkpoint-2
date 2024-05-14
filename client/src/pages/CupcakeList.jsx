@@ -1,8 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
-
-
 /* ************************************************************************* */
 const someCupcakes = [];
 someCupcakes.push(
@@ -40,12 +38,9 @@ someCupcakes.push(
 /* ************************************************************************* */
 
 function CupcakeList() {
-  console.info(useLoaderData());
   // Step 1: get all cupcakes
-
-  
   console.info(useLoaderData());
-
+  const cupcakeData = useLoaderData();
   // Step 3: get all accessories
 
   // Step 5: create filter state
@@ -65,6 +60,10 @@ function CupcakeList() {
       </form>
       <ul className="cupcake-list" id="cupcake-list">
         {/* Step 2: repeat this block for each cupcake */}
+        {cupcakeData.map((cupcake) => (
+          <Cupcake key={cupcake.name} data={cupcake} />
+        ))}
+
         {/* Step 5: filter cupcakes before repeating */}
         <li className="cupcake-item">
           <Cupcake />
