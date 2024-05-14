@@ -65,6 +65,11 @@ function CupcakeList() {
           <select id="cupcake-select">
             <option value="">---</option>
             {/* Step 4: add an option for each accessory */}
+            {acc.map((oneAcc) => (
+              <option value={oneAcc.slug} key={oneAcc.id}>
+                {oneAcc.name}
+              </option>
+            ))}
           </select>
         </label>
       </form>
