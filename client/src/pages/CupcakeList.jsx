@@ -41,8 +41,18 @@ function CupcakeList() {
 
   useEffect(() => {
     fetch("http://localhost:3310/api/accessories")
-      .then((response) => response.json())
-      .then((data) => setAccessories(data));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch accessories");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setAccessories(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching accessories:", error);
+      });
   }, []);
 
   // Step 5: create filter state

@@ -33,10 +33,14 @@ const router = createBrowserRouter([
         element: <CupcakeDetails />,
         loader: async ({ params }) => {
           const { id } = params;
-          const response = await fetch(
-            `http://localhost:3310/api/cupcakes/${id}`
-          );
-          return response.json();
+          try {
+            const response = await fetch(
+              `http://localhost:3310/api/cupcakes/${id}`
+            );
+            return response.json();
+          } catch (error) {
+            throw new Error(`Failed to fetch cupcake details : ${error}`);
+          }
         },
       },
     ],
