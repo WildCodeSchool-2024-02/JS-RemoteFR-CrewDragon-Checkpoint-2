@@ -94,7 +94,6 @@ function CupcakeList() {
             <Cupcake data={cupcake} />
           </Link>
         ))}
-        {/* end of block */}
       </ul>
     </>
   );

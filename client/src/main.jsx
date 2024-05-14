@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             );
             return response.json();
           } catch (error) {
-            throw new Error(`Failed to fetch cupcake details : ${error}`);
+            throw new Error(`Failed to show details : ${error}`);
           }
         },
       },
