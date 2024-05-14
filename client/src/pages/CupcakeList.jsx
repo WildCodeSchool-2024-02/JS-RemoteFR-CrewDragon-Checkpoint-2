@@ -34,10 +34,6 @@ someCupcakes.push(
   }
 );
 
-/* you can use someCupcakes if you're stucked on step 1 */
-/* if you're fine with step 1, just ignore this ;) */
-/* ************************************************************************* */
-
 function CupcakeList() {
   // Step 1: get all cupcakes
   const cupcakes = useLoaderData();
@@ -45,6 +41,8 @@ function CupcakeList() {
 
   // Step 3 : Get the accessories
   const [accessories, setAccessories] = useState([]);
+  // Step 5 : Filtrer list
+  const [selectedAccessory, setSelectedAccessory] = useState("");
   // Step 4 : Fill the accessories selector
   const [isLoading, setisLoading] = useState(true);
   console.info(accessories);
@@ -63,8 +61,18 @@ function CupcakeList() {
       });
   }, []);
 
+  // Filter the cupcakes based on the selected accessory
+  const filteredCupcakes = selectedAccessory
+    ? cupcakes.filter((cupcake) => cupcake.accessory_id === selectedAccessory)
+    : cupcakes;
+
+  // Handle accessory selection change
+  const handleAccessoryChange = (event) => {
+    setSelectedAccessory(event.target.value);
+  };
+
   // Passe les données comme Props et map sur chaque data
-  const allcupcakes = cupcakes.map((cupcake) => (
+  const allcupcakes = filteredCupcakes.map((cupcake) => (
     <li className="cupcake-item" key={cupcake.id}>
       {/* Passer la props a Cupcake  */}
       <Cupcake data={cupcake} />
@@ -78,17 +86,18 @@ function CupcakeList() {
       <form className="center">
         <label htmlFor="cupcake-select">
           {/* Step 5: use a controlled component for select */}
-          Filter by{" "}
-          <select id="cupcake-select">
+          Filter by
+          {/* Step 5 : Filter List  */}
+          <select
+            id="cupcake-select"
+            value={selectedAccessory}
+            onChange={handleAccessoryChange}
+          >
             <option value="">---</option>
-
             {/* Ajout d'un térnaire pour afficher les données ou le loading  */}
             {!isLoading ? (
               accessories.map((accessorie) => (
-                <option
-                  key={`accessorie : ${accessorie.slug}`}
-                  value={accessorie.name}
-                >
+                <option key={accessorie.id} value={accessorie.id}>
                   {accessorie.name}
                 </option>
               ))
@@ -101,7 +110,6 @@ function CupcakeList() {
       <ul className="cupcake-list" id="cupcake-list">
         {/* Step 2: repeat this block for each cupcake */}
 
-        {/* Affiche les cupcakes */}
         {allcupcakes}
 
         {/* Step 5: filter cupcakes before repeating */}
