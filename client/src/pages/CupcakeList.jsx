@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
 /* ************************************************************************* */
@@ -61,31 +61,21 @@ function CupcakeList() {
       });
   }, []);
 
-  // Filter the cupcakes based on the selected accessory
+  // Step 5: create filter state
   const filteredCupcakes = selectedAccessory
     ? cupcakes.filter((cupcake) => cupcake.accessory_id === selectedAccessory)
     : cupcakes;
 
-  // Handle accessory selection change
+  // Step 5: create filter state
   const handleAccessoryChange = (event) => {
     setSelectedAccessory(event.target.value);
   };
-
-  // Passe les données comme Props et map sur chaque data
-  const allcupcakes = filteredCupcakes.map((cupcake) => (
-    <li className="cupcake-item" key={cupcake.id}>
-      {/* Passer la props a Cupcake  */}
-      <Cupcake data={cupcake} />
-    </li>
-  ));
-  // Step 5: create filter state
 
   return (
     <>
       <h1>My cupcakes</h1>
       <form className="center">
         <label htmlFor="cupcake-select">
-          {/* Step 5: use a controlled component for select */}
           Filter by
           {/* Step 5 : Filter List  */}
           <select
@@ -108,11 +98,15 @@ function CupcakeList() {
         </label>
       </form>
       <ul className="cupcake-list" id="cupcake-list">
-        {/* Step 2: repeat this block for each cupcake */}
-
-        {allcupcakes}
-
         {/* Step 5: filter cupcakes before repeating */}
+        {filteredCupcakes.map((cupcake) => (
+          <li key={cupcake.id}>
+            {/* Step 6: Add Link for new page after click on cupcake */}
+            <Link to={`/cupcakes/${cupcake.id}`}>
+              <Cupcake data={cupcake} />
+            </Link>
+          </li>
+        ))}
       </ul>
     </>
   );
