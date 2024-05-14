@@ -46,7 +46,7 @@ function CupcakeList() {
   const [accessories, setAccessories] = useState([]); // get accessories from API
   const [isLoading, setisLoading] = useState(true); // toogle the data flux
   const [selectedAccessory, setSelectedAccessory] = useState(""); // store the selected accessory
-  const [filteredData, setFilteredData] = useState([]); // filter the cupcake according to select
+  const [filteredData, setFilteredData] = useState(data); // filter the cupcake according to select
 
   const handleSelect = (event) => {
     const { value } = event.target;
@@ -103,7 +103,7 @@ function CupcakeList() {
       <ul className="cupcake-list" id={`cupcake-list-${selectedAccessory}`}>
         {/* Step 2: repeat this block for each cupcake */}
         {/* Step 5: filter cupcakes before repeating */}
-        {filteredData.map((cupcake) => (
+        {filteredData.map((cupcake) => (    
           <li key={`cupcake ${cupcake.id}`} className="cupcake-item">
             <Cupcake data={cupcake} />
           </li>
