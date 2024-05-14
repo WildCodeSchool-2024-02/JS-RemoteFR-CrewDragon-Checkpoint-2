@@ -44,6 +44,7 @@ function CupcakeList() {
   const data = useLoaderData();
   // Step 3: get all accessories
   const [accessories, setAccessories] = useState([]); // get accessories from API
+  const [isLoading, setisLoading] = useState(true); // toogle the data flux
   console.info(accessories);
   useEffect(() => {
     fetch("http://localhost:3310/api/accessories")
@@ -56,6 +57,7 @@ function CupcakeList() {
       })
       .then((items) => {
         setAccessories(items);
+        setisLoading(false);
       });
   }, []);
 
@@ -70,6 +72,19 @@ function CupcakeList() {
           Filter by{" "}
           <select id="cupcake-select">
             <option value="">---</option>
+            {!isLoading ? (
+              accessories.map((accessorie) => (
+                <option
+                  key={`accessorie : ${accessorie.slug}`}
+                  value={accessorie.name}
+                >
+                  {accessorie.name}
+                </option>
+              ))
+            ) : (
+              <option value="">Loading...</option>
+            )}
+
             {/* Step 4: add an option for each accessory */}
           </select>
         </label>
