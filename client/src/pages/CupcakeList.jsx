@@ -42,6 +42,11 @@ function CupcakeList() {
   // Step 1: get all cupcakes
   console.info(useLoaderData(data));
 
+  const allCupcakes = data.map((e) => (
+    <option value={e.name} key={e.id}>
+      {e.name}
+    </option>
+  ));
   // Step 3: get all accessories
 
   // Step 5: create filter state
@@ -52,6 +57,10 @@ function CupcakeList() {
       <form className="center">
         <label htmlFor="cupcake-select">
           {/* Step 5: use a controlled component for select */}
+          <select name="" id="">
+            <option value="">---</option>
+            {allCupcakes}
+          </select>
           Filter by{" "}
           <select id="cupcake-select">
             <option value="">---</option>
@@ -63,7 +72,7 @@ function CupcakeList() {
         {/* Step 2: repeat this block for each cupcake */}
         {/* Step 5: filter cupcakes before repeating */}
         <li className="cupcake-item">
-          <Cupcake />
+          <Cupcake datas={data} />
         </li>
         {/* end of block */}
       </ul>
