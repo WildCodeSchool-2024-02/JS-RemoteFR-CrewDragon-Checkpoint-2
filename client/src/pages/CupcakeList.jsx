@@ -43,11 +43,7 @@ function CupcakeList() {
   // Step 1: get all cupcakes
   // console.info(useLoaderData(data));
 
-  const allCupcakes = cdata.map((e) => (
-    <option value={e.name} key={e.id}>
-      {e.name}
-    </option>
-  ));
+  const allCupcakes = cdata.map((e) => <Cupcake data={e} key={e.id} />);
 
   useEffect(() => {
     fetch(`http://localhost:3310/api/accessories`)
@@ -62,6 +58,12 @@ function CupcakeList() {
 
   console.info(aaccessory);
 
+  const allacces = aaccessory.map((e) => (
+    <option value={e.id} key={e.id}>
+      {e.name}
+    </option>
+  ));
+
   // Step 5: create filter state
 
   return (
@@ -70,13 +72,10 @@ function CupcakeList() {
       <form className="center">
         <label htmlFor="cupcake-select">
           {/* Step 5: use a controlled component for select */}
-          <select name="" id="">
-            <option value="">---</option>
-            {allCupcakes}
-          </select>
           Filter by{" "}
           <select id="cupcake-select">
             <option value="">---</option>
+            {allacces}
             {/* Step 4: add an option for each accessory */}
           </select>
         </label>
@@ -84,9 +83,7 @@ function CupcakeList() {
       <ul className="cupcake-list" id="cupcake-list">
         {/* Step 2: repeat this block for each cupcake */}
         {/* Step 5: filter cupcakes before repeating */}
-        <li className="cupcake-item">
-          <Cupcake datas={cdata} />
-        </li>
+        <li className="cupcake-item">{allCupcakes}</li>
         {/* end of block */}
       </ul>
     </>
