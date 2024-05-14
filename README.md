@@ -32,14 +32,14 @@ Chaque checkpoint implique un ensemble d’étapes similaires :
 
 Ton objectif est de voir où tu en es sur :
 
-- [ ] L'utilisation de fetch
-- [ ] L'utilisation des props
-- [ ] L'utilisation des states
-- [ ] L'utilisation de `map` et `filter`
-- [ ] Les loaders dans React Router
-- [ ] Le hook `useEffect`
-- [ ] La création de composants React
-- [ ] La création de routes avec React Router
+- [x] L'utilisation de fetch
+- [x] L'utilisation des props
+- [x] L'utilisation des states
+- [x] L'utilisation de `map` et `filter`
+- [x] Les loaders dans React Router
+- [x] Le hook `useEffect`
+- [x] La création de composants React
+- [x] La création de routes avec React Router
 
 Copie le fichier `.env.sample` du dossier `server` et renomme ta copie `.env`.
 
