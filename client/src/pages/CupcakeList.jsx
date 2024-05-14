@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Cupcake from "../components/Cupcake";
 
@@ -80,7 +80,9 @@ function CupcakeList() {
       </form>
       <ul className="cupcake-list" id="cupcake-list">
         {filteredCupcakes().map((cupcake) => (
-          <Cupcake key={cupcake.id} data={cupcake} />
+          <Link key={cupcake.id} to={`/cupcakes/${cupcake.id}`}>
+            <Cupcake data={cupcake} />
+          </Link>
         ))}
         {/* end of block */}
       </ul>
