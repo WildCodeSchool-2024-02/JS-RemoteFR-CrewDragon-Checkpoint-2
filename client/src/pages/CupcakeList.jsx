@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
@@ -41,6 +42,7 @@ function CupcakeList() {
   const cdata = useLoaderData();
   const [aaccessory, setAaccessory] = useState([]);
   const [filter, setFilter] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   // Step 1: get all cupcakes
   // console.info(useLoaderData(data));
 
@@ -68,6 +70,7 @@ function CupcakeList() {
   // Step 5: create filter state
   const filterFunc = (event) => {
     setFilter(event.target.value);
+    setIsLoading(true);
   };
   console.info(filter);
 
@@ -80,6 +83,7 @@ function CupcakeList() {
           Filter by{" "}
           <select id="cupcake-select" onChange={filterFunc}>
             <option value="">---</option>
+            <option value="all">all</option>
             {allacces}
             {/* Step 4: add an option for each accessory */}
           </select>
@@ -89,8 +93,16 @@ function CupcakeList() {
         {/* Step 2: repeat this block for each cupcake */}
         <li className="cupcake-item">{/* {allCupcakes} */}</li>
         {/* Step 5: filter cupcakes before repeating */}
-        {cdata.map((e) =>
-          e.accessory_id === filter ? <Cupcake data={e} key={e.id} /> : null
+        {isLoading ? (
+          cdata.map((e) =>
+            filter === "all" ? (
+              <Cupcake data={e} key={e.id} />
+            ) : e.accessory_id === filter ? (
+              <Cupcake data={e} key={e.id} />
+            ) : null
+          )
+        ) : (
+          <p>select cupcake</p>
         )}
         {/* end of block */}
       </ul>
